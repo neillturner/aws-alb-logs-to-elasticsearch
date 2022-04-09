@@ -9,8 +9,8 @@
     }
   ],
   "dependencies": {
-    "alb-log-parser": "0.0.3",
-    "aws-sdk": "^2.487.0",
+    "alb-log-parser": "0.0.8",
+    "aws-sdk": "^2.1091.0",
     "byline": "4.2.1",
     "path": "0.12.7",
     "stream": "0.0.2"
