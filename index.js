@@ -31,7 +31,12 @@ if (!esEndpoint) {
 } else {
   endpoint =  new AWS.Endpoint(esEndpoint);
 }
-const region = process.env['region'] || 'eu-west-1';
+
+const region = process.env['region'];
+if (!region) {
+    console.log("Error. Environment variable region is not defined")
+}
+
 const indexPrefix = process.env['index'] || 'elblogs';
 const index = indexPrefix + '-' + indexTimestamp; // adds a timestamp to index. Example: elblogs-2016.03.31
 const doctype = process.env['doctype'] || 'elb-access-logs';
@@ -116,7 +121,7 @@ function postDocumentToES(doc, context) {
             numDocsAdded ++;
             if (numDocsAdded === totLogLines) {
                 // Mark lambda success.  If not done so, it will be retried.
-                console.log('All ' + numDocsAdded + ' log records added to ES.');
+                console.log('All ' + numDocsAdded + ' log records added to index ' + index + ' in region ' + region + '.');
                 context.succeed();
             }
         });
